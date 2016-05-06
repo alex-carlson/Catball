@@ -8,6 +8,8 @@ public class levelManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		//debug player count
+		playerCount = 4;
 		levelGeometry = GameObject.Find ("Level");
 
 	}
@@ -18,7 +20,7 @@ public class levelManager : MonoBehaviour {
 	}
 
 	IEnumerator levelGen(){
-		
+		levelGeometry.transform.localScale = Vector3.one * (playerCount/4);
 		yield return new WaitForSeconds (1);
 	}
 }

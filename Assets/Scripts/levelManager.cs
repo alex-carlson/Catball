@@ -9,18 +9,16 @@ public class levelManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//debug player count
-		playerCount = 4;
-		levelGeometry = GameObject.Find ("Level");
+		playerCount = 35;
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		levelGeometry = GameObject.Find ("Level");
+        StartCoroutine("levelGen");
 	}
 
 	IEnumerator levelGen(){
-		levelGeometry.transform.localScale = Vector3.one * (playerCount/4);
+        Vector3 newScale = Vector3.one * (playerCount / 4);
+        levelGeometry.transform.localScale = Vector3.Lerp(levelGeometry.transform.localScale, newScale, 0.1f);
+        Camera.main.GetComponent<CameraBehaviour>().SetCameraDistance();
 		yield return new WaitForSeconds (1);
 	}
 }

@@ -11,7 +11,9 @@ public class disco : MonoBehaviour {
 		InvokeRepeating ("changeColor", 1, 1);
 	}
 
-	void changeColor(){
-		myLight.color = Random.ColorHSV (0, 1, 1, 1, 1, 1);
-	}
+    void changeColor()
+    {
+        Color myColor = Random.ColorHSV(0, 1, 1, 1, 1, 1);
+        myLight.color = Color.Lerp(myLight.color, myColor, 0.1f);
+    }
 }

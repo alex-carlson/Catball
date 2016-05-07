@@ -4,7 +4,7 @@ using System.Collections;
 public class catnipSpawner : MonoBehaviour {
 
 	public GameObject catnip;
-	[Range(1, 50)] public int size = 10;
+	[Range(1, 50)] public float size = 5;
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +17,13 @@ public class catnipSpawner : MonoBehaviour {
 	}
 
 	void dropNip(){
-		size = size + levelManager.playerCount;
+		size = levelManager.playerCount;
 		Instantiate (catnip, new Vector3(Random.value*size, 0, Random.value*size), Quaternion.identity);
 	}
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, size);
+    }
 }

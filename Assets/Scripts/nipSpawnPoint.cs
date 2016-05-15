@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
-public class updateGUI : MonoBehaviour {
+public class nipSpawnPoint : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -14,8 +13,9 @@ public class updateGUI : MonoBehaviour {
 	
 	}
 
-    public void SetPlayerCount()
+    void OnDrawGizmos()
     {
-        GetComponent<Text>().text = "Players: " + levelManager.playerCount;
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawCube(transform.position, Vector3.one);
     }
 }

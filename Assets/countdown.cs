@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class countdown : MonoBehaviour {
 
-    float timeLeft = 120;
+    float timeLeft = 1;
     Text myText;
 
 	// Use this for initialization
@@ -21,7 +21,14 @@ public class countdown : MonoBehaviour {
             myText.text = "Time: " + timeLeft.ToString("F2");
             if (timeLeft < 0)
             {
-                Time.timeScale = 0;
+                myText.text = "Time: 0";
+                //Time.timeScale = 0;
+                if(levelManager.isPlaying == true)
+                {
+                    levelManager.isPlaying = false;
+                    Animator anim = GameObject.Find("Game Over Text").GetComponent<Animator>();
+                    anim.SetBool("isAlive", false);
+                }
             }
         }
     }

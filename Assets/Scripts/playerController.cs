@@ -3,7 +3,7 @@ using System.Collections;
 
 public class playerController : MonoBehaviour {
 
-	public float scale;
+	[HideInInspector] public float scale;
 	public float speed = 10;
     float shrinkSpeed = 7000;
 	Rigidbody rb;
@@ -11,6 +11,7 @@ public class playerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
+		scale = transform.localScale.x;
 	}
 	
 	// Update is called once per frame
@@ -33,8 +34,20 @@ public class playerController : MonoBehaviour {
         }
 	}
 
+	void Update(){
+		if (transform.position.y < -10) {
+			Die ();
+		}
+	}
+
+	void OnCollisionEnter(Collision col){
+		if (col.gameObject.tag == "Catball") {
+			GetComponent<AudioSource> ().Play ();
+		}
+	}
+
     void Die()
     {
-
+		
     }
 }

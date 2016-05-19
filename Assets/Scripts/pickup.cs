@@ -17,7 +17,10 @@ public class pickup : MonoBehaviour {
     {
         if (col.gameObject.tag == "Catball") {
             col.transform.GetComponent<playerController>().scale += 1f;
-            Destroy(this.gameObject);
+			GetComponent<AudioSource> ().Play ();
+			GetComponent<MeshRenderer> ().enabled = false;
+			GetComponent<BoxCollider> ().enabled = false;
+            Destroy(this.gameObject, 1f);
         }
     }
 }

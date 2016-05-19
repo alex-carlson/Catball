@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class countdown : MonoBehaviour {
 
-    float timeLeft = 1;
+    float timeLeft = 120;
     Text myText;
 
 	// Use this for initialization

@@ -7,6 +7,7 @@ public class PhonePlayerScript : MonoBehaviour {
     public float moveSpeed = 5.0f;
     public float moveFriction = 0.95f;
     public float shakeThreshold = 20.0f;
+	public Rigidbody player;
     private Renderer m_renderer;
     private HFTGamepad m_gamepad;
     private HFTInput m_hftInput;
@@ -25,6 +26,7 @@ public class PhonePlayerScript : MonoBehaviour {
         m_renderer = GetComponent<Renderer>();
         m_gamepad = GetComponent<HFTGamepad>();
         m_hftInput = GetComponent<HFTInput>();
+		player = GetComponent<Rigidbody>();
 
         int playerNdx = s_playerCount++;
         transform.position = new Vector3(
@@ -50,6 +52,8 @@ public class PhonePlayerScript : MonoBehaviour {
         speed = speed * moveFriction;
 
         transform.Translate(Vector3.up * Time.deltaTime * speed);
+
+		Debug.Log (m_hftInput.gyro.attitude);
     }
 
     private float CenterOut(int v) {

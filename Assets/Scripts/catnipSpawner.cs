@@ -18,13 +18,8 @@ public class catnipSpawner : MonoBehaviour {
         }
 		InvokeRepeating ("dropNip", 2f, 5f);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-	void dropNip(){
+	public void dropNip(){
         //int r = Mathf.RoundToInt(Random.Range(0, nipPoints.Count));
         //Instantiate (catnip, nipPoints[r], Quaternion.identity);
 
@@ -37,5 +32,5 @@ public class catnipSpawner : MonoBehaviour {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, size);
     }
-
+		
 }

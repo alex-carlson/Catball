@@ -43,17 +43,37 @@ public class PhonePlayerScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        Quaternion q = Quaternion.Slerp(transform.rotation, m_hftInput.gyro.attitude, rotationSpeed * Time.deltaTime);
-        transform.rotation = q;
+        //Quaternion q = Quaternion.Slerp(transform.rotation, m_hftInput.gyro.attitude, rotationSpeed * Time.deltaTime);
+        //transform.rotation = q;
+
+
+		float myX = m_hftInput.gyro.rotationRate.x;
+		float myZ = m_hftInput.gyro.rotationRate.z;
+
+//		float myX = m_hftInput.gyro.attitude.x + m_hftInput.gyro.attitude.w;
+//		float myZ = m_hftInput.gyro.attitude.y - m_hftInput.gyro.attitude.z;
+
+		Vector3 myVect = m_hftInput.gyro.attitude * Vector3.back;
+
+
+		Debug.Log (myVect);
+
+
+		player.AddForce (myVect * 15);
+
+
+
 
         if (Mathf.Abs(m_hftInput.gyro.userAcceleration.z) > shakeThreshold) {
             speed = moveSpeed;
         }
         speed = speed * moveFriction;
 
-        transform.Translate(Vector3.up * Time.deltaTime * speed);
+        //transform.Translate(Vector3.up * Time.deltaTime * speed);
 
-		Debug.Log (m_hftInput.gyro.attitude);
+		//Debug.Log (m_hftInput.gyro.attitude);
+
+//		player.AddForce (myVect * 50);
     }
 
     private float CenterOut(int v) {

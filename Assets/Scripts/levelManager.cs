@@ -10,6 +10,7 @@ public class levelManager : MonoBehaviour {
     GameObject levelGeometry;
     public enum Stage { hill, blockFort };
     public Stage stage;
+	public static bool[] playersShaking;
 
     // Use this for initialization
     void Start () {
@@ -27,6 +28,15 @@ public class levelManager : MonoBehaviour {
             StartCoroutine("BlockFort");
         }
 	}
+
+//	void Update(){
+//		for(int i = 0;  i< playersShaking.Length; i++){
+//			if(playersShaking[i] == false){
+//				return;
+//			}
+//			GameObject.Find ("Catnip Spawner").GetComponent<catnipSpawner> ().dropNip ();
+//		}
+//	}
 
 	IEnumerator HillGen(){
         Vector3 newScale = Vector3.one * (playerCount / 4);

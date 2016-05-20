@@ -55,10 +55,6 @@ public class PhonePlayerScript : MonoBehaviour {
 
 		Vector3 myVect = m_hftInput.gyro.attitude * Vector3.back;
 
-
-		Debug.Log (myVect);
-
-
 		player.AddForce (myVect * 15);
 
 
@@ -69,11 +65,10 @@ public class PhonePlayerScript : MonoBehaviour {
         }
         speed = speed * moveFriction;
 
-        //transform.Translate(Vector3.up * Time.deltaTime * speed);
+		if (transform.position.y < -10) {
+			Die ();
+		}
 
-		//Debug.Log (m_hftInput.gyro.attitude);
-
-//		player.AddForce (myVect * 50);
     }
 
     private float CenterOut(int v) {
@@ -119,4 +114,31 @@ public class PhonePlayerScript : MonoBehaviour {
     {
         SetName(m_gamepad.Name);
     }
+
+	void Die()
+	{
+		StartCoroutine (deathAnim());
+		transform.position = Vector3.one * 100000;
+		moveSpeed = 0;
+	}
+
+	IEnumerator deathAnim(){
+		Color playerCol = m_color;
+
+		m_color = Color.black;
+		m_gamepad.Color = Color.black;
+		yield return new WaitForSeconds (0.2f);
+		m_color = Color.white;
+		m_gamepad.Color = Color.white;
+		yield return new WaitForSeconds (0.2f);
+		m_color = Color.black;
+		m_gamepad.Color = Color.black;
+		yield return new WaitForSeconds (0.2f);
+		m_color = Color.white;
+		m_gamepad.Color = Color.white;
+		yield return new WaitForSeconds (0.2f);
+		m_color = playerCol;
+		m_gamepad.Color = playerCol;
+
+	}
 }

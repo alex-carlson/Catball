@@ -4,7 +4,6 @@ using System.Collections;
 public class playerController : MonoBehaviour {
 
 	[HideInInspector] public float scale;
-	public float speed = 10;
     float shrinkSpeed = 7000;
 	Rigidbody rb;
 
@@ -16,10 +15,6 @@ public class playerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		float x = Input.GetAxis ("Horizontal");
-		float y = Input.GetAxis ("Vertical");
-
-        rb.AddForce(new Vector3(x * speed, 0, y * speed), ForceMode.Force);
 
         scale -= Time.deltaTime/shrinkSpeed;
 

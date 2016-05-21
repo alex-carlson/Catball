@@ -7,10 +7,13 @@ public class cameraShake : MonoBehaviour {
 	// if null.
 	Transform camTransform;
 
+
 	Vector3 offset = Vector3.zero;
 
 	// Amplitude of the shake. A larger value shakes the camera harder.
-	public float shakeAmount = 4.7f;
+	public float speed = 5000f;
+
+	private float fraction = 0; 
 
 	Vector3 originalPos;
 
@@ -25,15 +28,19 @@ public class cameraShake : MonoBehaviour {
 	void Start()
 	{
 		originalPos = camTransform.localPosition;
-		InvokeRepeating ("cameraSway", 0, 4);
+		InvokeRepeating ("cameraSway", 0, 3);
 	}
 
 	void cameraSway(){
-		offset = Random.insideUnitSphere * shakeAmount;
+		fraction = 0;
+		offset = originalPos + Random.insideUnitSphere * 2f;
 	}
 
 	void Update(){
-		camTransform.localPosition = Vector3.Slerp (originalPos, originalPos + offset, Time.deltaTime/100);
+		if (fraction < 4) {
+			fraction += Time.deltaTime / speed;
+			transform.position = Vector3.Lerp(camTransform.position, offset, fraction/10);
+		}
 		transform.LookAt (Vector3.zero);
 	}
 }

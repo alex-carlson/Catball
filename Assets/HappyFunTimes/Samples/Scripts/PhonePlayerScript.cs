@@ -17,6 +17,7 @@ public class PhonePlayerScript : MonoBehaviour {
     private GUIContent m_guiName = new GUIContent("");
     private Rect m_nameRect = new Rect(0,0,0,0);
     private float speed = 0.0f;
+	private HFTSoundPlayer m_soundPlayer;
 
     private static int s_playerCount = 0;
 
@@ -27,6 +28,7 @@ public class PhonePlayerScript : MonoBehaviour {
         m_gamepad = GetComponent<HFTGamepad>();
         m_hftInput = GetComponent<HFTInput>();
 		player = GetComponent<Rigidbody>();
+		m_soundPlayer = GetComponent<HFTSoundPlayer>();
 
         int playerNdx = s_playerCount++;
         transform.position = new Vector3(
@@ -39,6 +41,8 @@ public class PhonePlayerScript : MonoBehaviour {
 
         // Notify us if the name changes.
         m_gamepad.OnNameChange += ChangeName;
+
+		levelManager.playerCount = s_playerCount;
     }
 
     // Update is called once per frame
@@ -55,8 +59,7 @@ public class PhonePlayerScript : MonoBehaviour {
 
 		Vector3 myVect = m_hftInput.gyro.attitude * Vector3.back;
 
-		player.AddForce (myVect * 15);
-
+		player.AddForce (myVect * 25);
 
 
 
@@ -124,6 +127,7 @@ public class PhonePlayerScript : MonoBehaviour {
 
 	IEnumerator deathAnim(){
 		Color playerCol = m_color;
+		m_soundPlayer.PlaySound("explosion");
 
 		m_color = Color.black;
 		m_gamepad.Color = Color.black;

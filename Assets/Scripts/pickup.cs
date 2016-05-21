@@ -16,7 +16,7 @@ public class pickup : MonoBehaviour {
     void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "Catball") {
-            col.transform.GetComponent<playerController>().scale += 1f;
+            col.transform.GetComponent<playerController>().scale += 0.25f;
 			GetComponent<AudioSource> ().Play ();
 			GetComponent<MeshRenderer> ().enabled = false;
 			GetComponent<BoxCollider> ().enabled = false;

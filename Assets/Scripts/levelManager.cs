@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEditor;
+using HappyFunTimes;
 
 public class levelManager : MonoBehaviour {
 
@@ -15,8 +16,7 @@ public class levelManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-		playerCount = 2;
-        
+		playerCount = 0;
 
 		levelGeometry = GameObject.Find ("Level");
 

@@ -5,6 +5,6 @@ public class CameraBehaviour : MonoBehaviour {
 
     public void SetCameraDistance()
     {
-        GetComponent<Camera>().orthographicSize = 24 + (levelManager.playerCount / 4);
+        GetComponent<Camera>().orthographicSize = 24 + (levelManager.playerCount / 1.8f);
     }
 }

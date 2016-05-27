@@ -27,13 +27,13 @@ public class cameraShake : MonoBehaviour {
 
 	void Start()
 	{
-		originalPos = camTransform.localPosition;
+		originalPos = camTransform.localPosition - (Vector3.down * 4);
 		InvokeRepeating ("cameraSway", 0, 3);
 	}
 
 	void cameraSway(){
 		fraction = 0;
-		offset = originalPos + Random.insideUnitSphere * 2f;
+		offset = originalPos + Random.insideUnitSphere * 50f;
 	}
 
 	void Update(){

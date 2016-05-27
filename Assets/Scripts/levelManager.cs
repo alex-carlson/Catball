@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEditor;
 using HappyFunTimes;
+using UnityEngine.SceneManagement;
 
 public class levelManager : MonoBehaviour {
 
@@ -12,11 +13,13 @@ public class levelManager : MonoBehaviour {
     public enum Stage { hill, blockFort };
     public Stage stage;
 	public static bool[] playersShaking;
+	public static int alivePlayers = 0;
 
     // Use this for initialization
     void Start () {
 
-		playerCount = 0;
+		playerCount = 5;
+		alivePlayers = playerCount;
 
 		levelGeometry = GameObject.Find ("Level");
 
@@ -29,14 +32,24 @@ public class levelManager : MonoBehaviour {
         }
 	}
 
-//	void Update(){
+	void Update(){
 //		for(int i = 0;  i< playersShaking.Length; i++){
 //			if(playersShaking[i] == false){
 //				return;
 //			}
 //			GameObject.Find ("Catnip Spawner").GetComponent<catnipSpawner> ().dropNip ();
 //		}
-//	}
+
+		if (Input.GetKeyDown (KeyCode.Q)) {
+			alivePlayers--;
+			Debug.Log ("Alive Players: " + alivePlayers);
+		}
+
+		if (alivePlayers == 1) {
+			SceneManager.LoadSceneAsync ("GameOver", LoadSceneMode.Additive);
+			alivePlayers--;
+		}
+	}
 
 	IEnumerator HillGen(){
         Vector3 newScale = Vector3.one * (playerCount / 4);

@@ -33,7 +33,7 @@ public class cameraShake : MonoBehaviour {
 
 	void cameraSway(){
 		fraction = 0;
-		offset = originalPos + Random.insideUnitSphere * 50f;
+		offset = originalPos + Random.insideUnitSphere * 10f;
 	}
 
 	void Update(){

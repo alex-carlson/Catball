@@ -18,7 +18,7 @@ public class levelManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-		playerCount = 5;
+		playerCount = 10;
 		alivePlayers = playerCount;
 
 		levelGeometry = GameObject.Find ("Level");
@@ -45,7 +45,7 @@ public class levelManager : MonoBehaviour {
 			Debug.Log ("Alive Players: " + alivePlayers);
 		}
 
-		if (alivePlayers == 1) {
+		if (alivePlayers == 1 && isPlaying == true) {
 			SceneManager.LoadSceneAsync ("GameOver", LoadSceneMode.Additive);
 			this.enabled = false;
 		}

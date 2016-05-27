@@ -9,9 +9,12 @@ public class StartGame : MonoBehaviour {
 
     public void LoadLevel()
     {
-		
-		SceneManager.LoadSceneAsync ("Hill", LoadSceneMode.Additive);
-		fadeOut ();
+		if (mainMenuItems == null) {
+			SceneManager.LoadScene ("Main Menu");
+		} else {
+			fadeOut ();
+			SceneManager.LoadScene ("Hill", LoadSceneMode.Additive);
+		}
     }
 
 	public void fadeOut(){

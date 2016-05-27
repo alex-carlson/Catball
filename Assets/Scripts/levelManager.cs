@@ -13,7 +13,7 @@ public class levelManager : MonoBehaviour {
     public enum Stage { hill, blockFort };
     public Stage stage;
 	public static bool[] playersShaking;
-	public static int alivePlayers = 0;
+	public static int alivePlayers;
 
     // Use this for initialization
     void Start () {
@@ -40,14 +40,14 @@ public class levelManager : MonoBehaviour {
 //			GameObject.Find ("Catnip Spawner").GetComponent<catnipSpawner> ().dropNip ();
 //		}
 
-		if (Input.GetKeyDown (KeyCode.Q)) {
+		if (Input.GetKeyDown (KeyCode.K)) {
 			alivePlayers--;
 			Debug.Log ("Alive Players: " + alivePlayers);
 		}
 
 		if (alivePlayers == 1) {
 			SceneManager.LoadSceneAsync ("GameOver", LoadSceneMode.Additive);
-			alivePlayers--;
+			this.enabled = false;
 		}
 	}
 

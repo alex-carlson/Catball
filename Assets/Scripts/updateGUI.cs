@@ -16,6 +16,6 @@ public class updateGUI : MonoBehaviour {
 
     public void SetPlayerCount()
     {
-        GetComponent<Text>().text = "Players: " + levelManager.playerCount;
+		GetComponent<Text>().text = "Players: " + levelManager.alivePlayers;
     }
 }

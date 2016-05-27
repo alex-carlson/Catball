@@ -43,6 +43,8 @@ public class playerController : MonoBehaviour {
 
     void Die()
     {
-		
+		levelManager.alivePlayers--;
+		this.gameObject.SetActive (false);
+		Debug.Log ("Died.  There are "+levelManager.alivePlayers+" Cats left");
     }
 }

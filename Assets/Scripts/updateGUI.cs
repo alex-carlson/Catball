@@ -11,7 +11,9 @@ public class updateGUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        SetPlayerCount();
+		if(Application.loadedLevel == 0){
+			SetPlayerCount();
+		}
 	}
 
     public void SetPlayerCount()

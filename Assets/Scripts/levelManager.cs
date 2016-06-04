@@ -18,7 +18,7 @@ public class levelManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-		playerCount = 10;
+		playerCount = 2;
 		alivePlayers = playerCount;
 
 		levelGeometry = GameObject.Find ("Level");
@@ -42,6 +42,11 @@ public class levelManager : MonoBehaviour {
 
 		if (Input.GetKeyDown (KeyCode.K)) {
 			alivePlayers--;
+			Debug.Log ("Alive Players: " + alivePlayers);
+		}
+
+		if (Input.GetKeyDown (KeyCode.L)) {
+			alivePlayers++;
 			Debug.Log ("Alive Players: " + alivePlayers);
 		}
 

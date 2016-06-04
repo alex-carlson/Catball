@@ -11,10 +11,19 @@ public class playerController : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
 		scale = transform.localScale.x;
+		levelManager.playerCount++;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+
+		if (levelManager.isPlaying == false) {
+			return;
+		} else {
+			if (GetComponent<Rigidbody> ().useGravity == false) {
+				GetComponent<Rigidbody> ().useGravity = true;
+			}
+		}
 
         scale -= Time.deltaTime/shrinkSpeed;
 

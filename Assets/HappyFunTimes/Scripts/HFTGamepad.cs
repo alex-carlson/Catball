@@ -222,6 +222,7 @@ public class HFTGamepad : MonoBehaviour {
     m_netPlayer.SendCmd("play");
     SendControllerOptions();
     SendColor();
+		transform.position += new Vector3(Random.value, 0, 0) * 30;
   }
 
   void Awake()

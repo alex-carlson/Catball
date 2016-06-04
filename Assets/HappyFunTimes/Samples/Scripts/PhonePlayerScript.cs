@@ -30,11 +30,11 @@ public class PhonePlayerScript : MonoBehaviour {
 		player = GetComponent<Rigidbody>();
 		m_soundPlayer = GetComponent<HFTSoundPlayer>();
 
-        int playerNdx = s_playerCount++;
-        transform.position = new Vector3(
-            CenterOut(playerNdx % 9)     * 2.5f,
-            CenterOut(playerNdx / 9 % 5) * 2.5f,
-            transform.position.z);
+        //int playerNdx = s_playerCount++;
+//        transform.position = new Vector3(
+//            CenterOut(playerNdx % 9)     * 2.5f,
+//            CenterOut(playerNdx / 9 % 5) * 2.5f,
+//            transform.position.z);
 
         SetName(m_gamepad.Name);
         SetColor(m_gamepad.Color);
@@ -57,19 +57,26 @@ public class PhonePlayerScript : MonoBehaviour {
 //		float myX = m_hftInput.gyro.attitude.x + m_hftInput.gyro.attitude.w;
 //		float myZ = m_hftInput.gyro.attitude.y - m_hftInput.gyro.attitude.z;
 
-		Vector3 myVect = m_hftInput.gyro.attitude * Vector3.back;
+		if (levelManager.isPlaying) {
 
-		player.AddForce (myVect * 25);
+			Vector3 myVect = m_hftInput.gyro.attitude * Vector3.back;
+
+			player.AddForce (myVect * 25);
 
 
 
-        if (Mathf.Abs(m_hftInput.gyro.userAcceleration.z) > shakeThreshold) {
-            speed = moveSpeed;
-        }
-        speed = speed * moveFriction;
+			if (Mathf.Abs (m_hftInput.gyro.userAcceleration.z) > shakeThreshold) {
+				speed = moveSpeed;
+			}
+			speed = speed * moveFriction;
 
-		if (transform.position.y < -10) {
-			Die ();
+			if (transform.position.y < -10) {
+				Die ();
+			}
+
+		} else {
+			Quaternion q = Quaternion.Slerp(transform.rotation, m_hftInput.gyro.attitude, rotationSpeed * Time.deltaTime);
+			transform.rotation = q;
 		}
 
     }

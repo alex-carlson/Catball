@@ -11,7 +11,7 @@ public class waitingText : MonoBehaviour {
 
         if (waiting == true)
         {
-            if (levelManager.playerCount > 1)
+			if (levelManager.alivePlayers > 1)
             {
                 waiting = false;
                 StartCoroutine(StartGame());

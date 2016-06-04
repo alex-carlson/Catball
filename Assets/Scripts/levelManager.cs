@@ -1,35 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEditor;
 using HappyFunTimes;
 using UnityEngine.SceneManagement;
 
 public class levelManager : MonoBehaviour {
 
-	public static int playerCount;
+	public static int playerCount = 0;
     public static bool isPlaying = false;
     public GameObject block;
     GameObject levelGeometry;
     public enum Stage { hill, blockFort };
     public Stage stage;
 	public static bool[] playersShaking;
-	public static int alivePlayers;
+	public static int alivePlayers = 0;
 
     // Use this for initialization
     void Start () {
 
-		playerCount = 2;
-		alivePlayers = playerCount;
+//		playerCount = 0;
+//		alivePlayers = playerCount;
 
 		levelGeometry = GameObject.Find ("Level");
 
-        if (stage == Stage.hill)
-        {
-            StartCoroutine("HillGen");
-        } else if (stage == Stage.blockFort)
-        {
-            StartCoroutine("BlockFort");
-        }
+//        if (stage == Stage.hill)
+//        {
+//            StartCoroutine("HillGen");
+//        } else if (stage == Stage.blockFort)
+//        {
+//            StartCoroutine("BlockFort");
+//        }
 	}
 
 	void Update(){
@@ -51,8 +50,7 @@ public class levelManager : MonoBehaviour {
 		}
 
 		if (alivePlayers == 1 && isPlaying == true) {
-			SceneManager.LoadSceneAsync ("GameOver", LoadSceneMode.Additive);
-			this.enabled = false;
+			StartCoroutine (startGame (0, 1, 1));
 		}
 	}
 
@@ -84,4 +82,18 @@ public class levelManager : MonoBehaviour {
         Camera.main.GetComponent<CameraBehaviour>().SetCameraDistance();
         yield return new WaitForSeconds(1);
     }
+	public IEnumerator startGame(float alphaStart, float alphaFinish, float time){
+		float elapsedTime = 0;
+
+		this.enabled = false;
+
+		Camera.main.GetComponent<SimpleBlit> ().TransitionMaterial.SetFloat ("_Cutoff", alphaStart);
+
+		while (elapsedTime < time) {
+			Camera.main.GetComponent<SimpleBlit> ().TransitionMaterial.SetFloat ("_Cutoff", elapsedTime);
+			elapsedTime += Time.deltaTime;
+			yield return new WaitForEndOfFrame();
+		}
+		SceneManager.LoadScene ("GameOver", LoadSceneMode.Additive);
+	}
 }

@@ -5,23 +5,18 @@ using UnityEngine.SceneManagement;
 public class StartGame : MonoBehaviour {
 
 	public GameObject mainMenuItems;
+	public bool mainMenu = true;
 
 	void Update(){
 		if (Input.anyKeyDown) {
-			StartCoroutine (startGame (0, 1, 1));
+
+			if (mainMenu) {
+				StartCoroutine (startGame (0, 1, 1));
+			} else {
+				StartCoroutine (startGame (1, 0, 1));
+			}
 		}
 	}
-
-
-    public void LoadLevel()
-    {
-		if (mainMenuItems == null) {
-			startGame (0f, 1f, 4f);
-		} else {
-			fadeOut ();
-			SceneManager.LoadScene ("Hill", LoadSceneMode.Additive);
-		}
-    }
 
 	public void fadeOut(){
 		mainMenuItems.SetActive (false);
@@ -39,6 +34,13 @@ public class StartGame : MonoBehaviour {
 			elapsedTime += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
-		SceneManager.LoadScene ("Hill");
+
+		if (mainMenu) {
+			fadeOut ();
+			SceneManager.LoadScene ("Hill", LoadSceneMode.Additive);
+		} else {
+			SceneManager.LoadScene ("Main Menu");
+			levelManager.isPlaying = false;
+		}
 	}
 }

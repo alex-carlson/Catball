@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using HappyFunTimes;
 
 public class playerController : MonoBehaviour {
 
@@ -8,10 +9,12 @@ public class playerController : MonoBehaviour {
 	Rigidbody rb;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		rb = GetComponent<Rigidbody> ();
 		scale = transform.localScale.x;
+		levelManager.alivePlayers++;
 		levelManager.playerCount++;
+		Debug.Log (levelManager.alivePlayers + ", " + levelManager.playerCount);
 	}
 	
 	// Update is called once per frame
@@ -39,7 +42,7 @@ public class playerController : MonoBehaviour {
 	}
 
 	void Update(){
-		if (transform.position.y < -10) {
+		if (transform.position.y < -100) {
 			Die ();
 		}
 	}
